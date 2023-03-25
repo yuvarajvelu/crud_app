@@ -25,7 +25,7 @@ export const login = async (req, res) => {
             username: req.body.username
         }
     })
-    const isValid = comparePassword(req.body.password, user.password)
+    const isValid = await comparePassword(req.body.password, user.password)
     if(!isValid) {
         res.status(404)
         res.json({msg: "Invalid login"})

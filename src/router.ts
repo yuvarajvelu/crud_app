@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { body } from 'express-validator'
 import { addNewProduct, deleteProduct, getAllProducts, getUniqueProduct, updateProduct } from './handlers/product'
+import { createSubUpdate, deleteSubUpdate, getAllSubUpdates, getOneSubUpdate, modifySubUpdate } from './handlers/sub_update'
 import { createUpdate, deleteUpdate, getAllUpdates, getOneUpdate, modifyUpdate } from './handlers/update'
 import { inputErrorHandler } from './modules/middleware'
 const router = Router()
@@ -32,19 +33,20 @@ router.delete('/updates/:id',deleteUpdate)
 
 //for sub updates
 
-router.get('/subupdates',()=>{})
-router.get('/subupdates/:id',()=>{})
+router.get('/subupdates',getAllSubUpdates)
+router.get('/subupdates/:id',getOneSubUpdate)
 router.post('/subupdates',
     body('name').exists(),
     body('description').exists(),
+    body('updateId').exists(),
     inputErrorHandler,
-() => {})
+    createSubUpdate)
 router.put('/subupdates/:id',
     body('name').optional().isString(),
     body('description').optional().isString(),
     inputErrorHandler,
-    () => {})
-router.delete('/subupdates/:id',()=> {})
+    modifySubUpdate)
+router.delete('/subupdates/:id',deleteSubUpdate)
 
 
 router.use((err,req,res,next)=> {
