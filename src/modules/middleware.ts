@@ -1,13 +1,12 @@
-import { validationResult } from 'express-validator'
+import { validationResult } from "express-validator";
 
-export const inputErrorHandler = (req,res,next) => {
-    const errors = validationResult(req)
-    if(!errors.isEmpty()) {
-        res.status(400);
-        res.json({errors: errors.array()})
-        return
-    } else {
-        next()
-    }
-
-}
+export const inputErrorHandler = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(400);
+    res.json({ errors: errors.array() });
+    return;
+  } else {
+    next();
+  }
+};
